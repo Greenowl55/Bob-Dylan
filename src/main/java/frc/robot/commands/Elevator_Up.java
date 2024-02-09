@@ -50,6 +50,7 @@ public class Elevator_Up extends InstantCommand {
     // Called once when this command runs
     @Override
     public void initialize() {
+        m_elevator_Tilt.myValveForward();
     }
 
     @Override

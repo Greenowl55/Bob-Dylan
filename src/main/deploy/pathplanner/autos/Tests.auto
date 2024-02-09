@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2notesimple"
+            "pathName": "move"
           }
         }
       ]
     }
   },
   "folder": null,
-  "choreoAuto": true
+  "choreoAuto": false
 }
