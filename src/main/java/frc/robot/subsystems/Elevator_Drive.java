@@ -59,8 +59,8 @@ elevator_Motor = new TalonFX(15);
 // elevator_Motor.configFactoryDefault();
 
 //         /* Invert Motor? and set Break Mode */
-// elevator_Motor.setInverted(false);
-// elevator_Motor.setNeutralMode(NeutralMode.Brake);
+elevator_Motor.setInverted(false);
+elevator_Motor.setNeutralMode(NeutralModeValue.Brake);
 
 //         /* Set the peak and nominal outputs */
 // elevator_Motor.configNominalOutputForward(0, 30);

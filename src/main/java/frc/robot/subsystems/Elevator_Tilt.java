@@ -77,5 +77,12 @@ compressor1 = new Compressor(19, PneumaticsModuleType.CTREPCM);
     public void myValveReverse(){
         elevator_Rams.set(Value.kReverse);
     }
+    public void myValveToggle(){
+        if (elevator_Rams.get()==Value.kOff){
+            myValveReverse();
+        }else{
+            elevator_Rams.toggle();
+        }
+    }
 }
 
