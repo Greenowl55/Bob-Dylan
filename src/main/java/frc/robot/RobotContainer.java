@@ -106,7 +106,7 @@ private final XboxController driver = new XboxController(0);
     shootSlow.whileTrue(new Shoot_Slow( m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton elevatorHight = new JoystickButton(coDriver, XboxController.Button.kLeftStick.value);        
-    elevatorHight.whileTrue(new Elevator_Hight().withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    elevatorHight.whileTrue(new Elevator_Hight( m_elevator_Drive ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
     }
 
   public RobotContainer() {
