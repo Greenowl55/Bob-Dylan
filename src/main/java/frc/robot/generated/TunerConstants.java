@@ -8,7 +8,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.ClosedLoopOutputType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants.SteerFeedbackType;
 
 import edu.wpi.first.math.util.Units;
-import frc.robot.commands.CommandSwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class TunerConstants {
     // Both sets of gains need to be tuned to your individual robot.
@@ -85,13 +85,10 @@ public class TunerConstants {
             .withSteerMotorInverted(kSteerMotorReversed);
 
 
-
-        
-
     // Front Left
     private static final int kFrontLeftDriveMotorId = 4;
     private static final int kFrontLeftSteerMotorId = 3;
-    private static final int kFrontLeftEncoderId = 12;
+    private static final int kFrontLeftEncoderId = 10;
     private static final double kFrontLeftEncoderOffset = -0.264404296875;
 
     private static final double kFrontLeftXPosInches = 10.875;
@@ -118,9 +115,9 @@ public class TunerConstants {
     // Back Right
     private static final int kBackRightDriveMotorId = 8;
     private static final int kBackRightSteerMotorId = 7;
-    private static final int kBackRightEncoderId = 10;
+    private static final int kBackRightEncoderId = 12;
     private static final double kBackRightEncoderOffset = -0.172607421875;
-
+        
     private static final double kBackRightXPosInches = -10.875;
     private static final double kBackRightYPosInches = -10.875;
 
@@ -134,6 +131,6 @@ public class TunerConstants {
     private static final SwerveModuleConstants BackRight = ConstantCreator.createModuleConstants(
             kBackRightSteerMotorId, kBackRightDriveMotorId, kBackRightEncoderId, kBackRightEncoderOffset, Units.inchesToMeters(kBackRightXPosInches), Units.inchesToMeters(kBackRightYPosInches), kInvertRightSide);
 
-    public static final CommandSwerveDrivetrain DriveTrain = new CommandSwerveDrivetrain(DrivetrainConstants, FrontLeft, FrontRight, BackLeft, BackRight);
-            
+    public static final CommandSwerveDrivetrain DriveTrain = new CommandSwerveDrivetrain(DrivetrainConstants, FrontLeft,
+            FrontRight, BackLeft, BackRight);
 }
