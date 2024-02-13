@@ -89,7 +89,7 @@ elevator_Motor.setNeutralMode(NeutralModeValue.Brake);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void Elevatormove(double speed) {
-        elevator_Motor.set(speed);
+        elevator_Motor.set(0.5);
     }
 }
 
