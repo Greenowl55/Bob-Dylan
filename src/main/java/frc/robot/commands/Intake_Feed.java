@@ -55,8 +55,8 @@ public class Intake_Feed extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double collectfeed = m_shooterspeed.getAsDouble();
-        m_shooter.ShooterFast(collectfeed);
+       // double collectfeed = m_shooterspeed.getAsDouble();
+        m_shooter.ShooterFast(0.3);
     }
 
     // Called once the command ends or is interrupted.

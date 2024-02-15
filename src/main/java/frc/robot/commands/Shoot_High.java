@@ -55,8 +55,8 @@ public class Shoot_High extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double shootfast = m_shooterspeed.getAsDouble();
-        m_shooter.ShooterFast(shootfast);
+       // double shootfast = m_shooterspeed.getAsDouble();
+        m_shooter.ShooterFast(0.7);
     }
 
     // Called once the command ends or is interrupted.

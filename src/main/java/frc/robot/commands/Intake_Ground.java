@@ -56,8 +56,8 @@ public class Intake_Ground extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double intakespeed = m_intakespeed.getAsDouble();
-            m_intake.Intakerun(intakespeed);
+       // double intakespeed = m_intakespeed.getAsDouble();
+            m_intake.Intakerun(0.4);
 
     }
 
