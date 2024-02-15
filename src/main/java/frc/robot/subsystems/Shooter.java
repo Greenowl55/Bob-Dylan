@@ -53,7 +53,7 @@ m_shooterFront = new TalonFX(18);
 m_shooterFront.getConfigurator().apply(new TalonFXConfiguration());
         /* Invert Motor? and set Break Mode */
 m_shooterFront.setInverted(false);
-m_shooterFront.setNeutralMode(NeutralModeValue.Brake);
+m_shooterFront.setNeutralMode(NeutralModeValue.Coast);
 
         /* Set the peak and nominal outputs */
 // shooter_Front.configNominalOutputForward(0, 30);

@@ -86,7 +86,7 @@ m_intakemotor.setNeutralMode(NeutralModeValue.Brake);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void Intakerun(double speed){
-        m_intakemotor.set(speed);
+        m_intakemotor.set(0.7);
     }
 }
 
