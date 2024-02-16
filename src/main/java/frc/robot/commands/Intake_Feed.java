@@ -56,12 +56,15 @@ public class Intake_Feed extends Command {
     @Override
     public void execute() {
        // double collectfeed = m_shooterspeed.getAsDouble();
-        m_shooter.ShooterFast(0.3);
+        m_shooter.ShooterRunFront(-0.3);
+        m_shooter.ShooterRunBack(-0.3);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        m_shooter.ShooterRunFront(0.0);
+        m_shooter.ShooterRunBack(0.0);
     }
 
     // Returns true when the command should end.

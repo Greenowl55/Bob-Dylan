@@ -58,13 +58,14 @@ public class Elevator_Hight extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double elevatorspeed = m_elevatorspeed.getAsDouble();
-            m_elevator_Drive.Elevatormove(elevatorspeed);
+        //double elevatorspeed = m_elevatorspeed.getAsDouble();
+            m_elevator_Drive.Elevatormove(0.5);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        m_elevator_Drive.Elevatormove(0.0);
     }
 
     // Returns true when the command should end.

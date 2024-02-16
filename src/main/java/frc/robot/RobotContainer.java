@@ -93,10 +93,10 @@ private final XboxController driver = new XboxController(0);
     final JoystickButton ElevatorToggle = new JoystickButton(driver, XboxController.Button.kX.value);
     ElevatorToggle.onTrue(new Elevator_Toggle(m_elevator_Tilt).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
-    final JoystickButton inakeGround = new JoystickButton(driver, XboxController.Button.kRightBumper.value);        
+    final JoystickButton inakeGround = new JoystickButton(driver, XboxController.Button.kY.value);        
     inakeGround.whileTrue(new Intake_Ground( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
-    final JoystickButton intakeFeed = new JoystickButton(driver, XboxController.Button.kX.value);        
+    final JoystickButton intakeFeed = new JoystickButton(driver, XboxController.Button.kB.value);        
     intakeFeed.whileTrue(new Intake_Feed( m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton shootFast = new JoystickButton(coDriver, XboxController.Button.kA.value);        

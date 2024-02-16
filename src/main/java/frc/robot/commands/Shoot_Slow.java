@@ -56,12 +56,15 @@ public class Shoot_Slow extends Command {
     @Override
     public void execute() {
         //double shootslow = m_shooterspeed.getAsDouble();
-        m_shooter.ShooterFast(0.5);
+        m_shooter.ShooterRunFront(0.5);
+        m_shooter.ShooterRunBack(0.5);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        m_shooter.ShooterRunFront(0.0);
+        m_shooter.ShooterRunBack(0.0);
     }
 
     // Returns true when the command should end.
