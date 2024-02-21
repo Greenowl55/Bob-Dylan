@@ -56,8 +56,8 @@ public class Shoot_High extends Command {
     @Override
     public void execute() {
        // double shootfast = m_shooterspeed.getAsDouble();
-        m_shooter.ShooterRunFront(-0.7);
-        m_shooter.ShooterRunBack(0.9);
+        m_shooter.ShooterRunFront(0.99);
+        m_shooter.ShooterRunBack(-0.99);
     }
 
     // Called once the command ends or is interrupted.
