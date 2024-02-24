@@ -4,40 +4,51 @@
 
 package frc.robot;
 
+import static frc.robot.Autos.Paths.*;
+
 import java.util.Set;
 
 import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Elevator_Down;
-import frc.robot.commands.Elevator_Up;
-import frc.robot.commands.Elevator_Toggle;
-import frc.robot.commands.Intake_Feed;
-import frc.robot.commands.Intake_Ground;
-import frc.robot.commands.Intake_Reverse;
-import frc.robot.commands.Shoot_High;
-import frc.robot.commands.Shoot_Slow;
+import frc.robot.commands.*;
+// import frc.robot.commands.Elevator_Down;
+// import frc.robot.commands.Elevator_Up;
+// import frc.robot.commands.Elevator_Toggle;
+// import frc.robot.commands.Intake_Feed;
+// import frc.robot.commands.Intake_Ground;
+// import frc.robot.commands.Intake_Reverse;
+// import frc.robot.commands.Shoot_High;
+// import frc.robot.commands.Shoot_Slow;
+
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.Elevator_Drive;
-import frc.robot.subsystems.Elevator_Tilt;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+
+import frc.robot.subsystems.*;
+// import frc.robot.subsystems.CommandSwerveDrivetrain;
+// import frc.robot.subsystems.Elevator_Drive;
+// import frc.robot.subsystems.Elevator_Tilt;
+// import frc.robot.subsystems.Intake;
+// import frc.robot.subsystems.Shooter;
 import pabeles.concurrency.IntRangeConsumer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+// import frc.robot.Auton.AutoChooser;
+
 
 public class RobotContainer {
   private double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
@@ -57,16 +68,17 @@ public class RobotContainer {
 
 
   /* add the subsytems */
-    public final Elevator_Tilt m_elevator_Tilt = new Elevator_Tilt();
-    public final Elevator_Drive m_elevator_Drive = new Elevator_Drive();
-    public final Intake m_intake = new Intake();
-    public final Shooter m_shooter = new Shooter();
-
+    private final Elevator_Tilt m_elevator_Tilt = new Elevator_Tilt();
+    private final Elevator_Drive m_elevator_Drive = new Elevator_Drive();
+    private final Intake m_intake = new Intake();
+    private final Shooter m_shooter = new Shooter();
+   // private final AutoChooser AutoChooser = new AutoChooser();
   /* add the joysticks */
   private final Joystick coDriver = new Joystick(1);
 private final XboxController driver = new XboxController(0);
 
 /* smartdashboard buttons */
+SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
   /* Path follower */
   private Command runAuto = drivetrain.getAutoPath("Tests");
@@ -81,7 +93,7 @@ private final XboxController driver = new XboxController(0);
             .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ).ignoringDisable(true));
 
-    joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
+    joystick.a().toggleOnTrue(drivetrain.applyRequest(() -> brake));
     //joystick.b().whileTrue(drivetrain
     //    .applyRequest(() -> point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))));
 
@@ -101,20 +113,20 @@ private final XboxController driver = new XboxController(0);
     final JoystickButton ElevatorToggle = new JoystickButton(driver, XboxController.Button.kX.value);
     ElevatorToggle.onTrue(new Elevator_Toggle(m_elevator_Tilt).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
-    final JoystickButton InakeGround = new JoystickButton(driver, XboxController.Button.kY.value);        
-    InakeGround.toggleOnTrue(new Intake_Ground( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    // final JoystickButton InakeGround = new JoystickButton(driver, XboxController.Button.kY.value);        
+    // InakeGround.toggleOnTrue(new Intake_Ground( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-    final JoystickButton InakeReverse = new JoystickButton(driver, XboxController.Button.kRightBumper.value);        
-    InakeReverse.whileTrue(new Intake_Reverse( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    // final JoystickButton InakeReverse = new JoystickButton(driver, XboxController.Button.kRightBumper.value);        
+    // InakeReverse.whileTrue(new Intake_Reverse( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
     final JoystickButton IntakeFeed = new JoystickButton(driver, XboxController.Button.kB.value);        
-    IntakeFeed.toggleOnTrue(new Intake_Feed( m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    IntakeFeed.whileTrue(new Intake_Feed( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
-    final JoystickButton ShootFast = new JoystickButton(coDriver, 1);        
-    ShootFast.whileTrue(new Shoot_High( m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    final JoystickButton ShootFast = new JoystickButton(driver, XboxController.Button.kY.value);        
+    ShootFast.whileTrue(new Shoot_High( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
-    final JoystickButton ShootSlow = new JoystickButton(coDriver, 2);        
-    ShootSlow.whileTrue(new Shoot_Slow( m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    final JoystickButton ShootSlow = new JoystickButton(driver, XboxController.Button.kRightBumper.value);        
+    ShootSlow.whileTrue(new Shoot_Slow( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton ElevatorUp = new JoystickButton(coDriver, 3);        
     ElevatorUp.whileTrue(new Elevator_Up( m_elevator_Drive ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
@@ -127,15 +139,20 @@ private final XboxController driver = new XboxController(0);
     configureBindings();
 
         // Build an auto chooser. This will use Commands.none() as the default option.
-    //autoChooser =  AutoBuilder.buildAutoChooser("My Default Auto");
-    //SmartDashboard.putData("Auto Chooser", autoChooser);
-    
+    autoChooser =  AutoBuilder.buildAutoChooser("My Default Auto");
+    SmartDashboard.putData("Auto Chooser", autoChooser);
+
+    autoChooser.setDefaultOption("Drive", runAuto);
+    autoChooser.addOption("Drive and turn", runAuto);
+    autoChooser.addOption("Silly spin", runAuto);
+    autoChooser.addOption("oneMeter", runAuto);
+    autoChooser.addOption("trap", runAuto);
   }
 
   public Command getAutonomousCommand() {
     /* First put the drivetrain into auto run mode, then run the auto */
     //return runAuto; // change to lines below when autochoser is figured out
-  return new PathPlannerAuto("Tests"); 
-    //return autoChooser.getSelected();
+  //return new PathPlannerAuto("Tests"); 
+   return autoChooser.getSelected();
   }
 }

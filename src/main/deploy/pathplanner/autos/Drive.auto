@@ -1,12 +1,6 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.2535268313752226,
-      "y": 5.519087794933904
-    },
-    "rotation": 180.0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
@@ -14,15 +8,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "move"
+            "pathName": "Move"
           }
         },
         {
           "type": "sequential",
           "data": {
-            "commands": [
-              
-            ]
+            "commands": []
           }
         }
       ]
