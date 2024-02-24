@@ -149,8 +149,8 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     // autoChooser.addOption("Silly spin", runAuto);
     // autoChooser.addOption("oneMeter", runAuto);
     // autoChooser.addOption("trap", runAuto );
-    autoChooser.setDefaultOption("Score_Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
-    autoChooser.addOption("Drive", new Drive(drivetrain));
+    autoChooser.setDefaultOption("Drive", new Drive(drivetrain));
+    autoChooser.addOption("Score_Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
     autoChooser.addOption("speaker", new Speaker(m_intake, m_shooter));
   }
 
