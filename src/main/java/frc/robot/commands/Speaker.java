@@ -16,19 +16,19 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
-public class Amp extends SequentialCommandGroup{
+public class Speaker extends SequentialCommandGroup{
     private final Shooter shooter;
     private final Intake intake;
 
-    public Amp (Intake m_intake, Shooter m_shooter) {
+    public Speaker (Intake m_intake, Shooter m_shooter) {
 
         shooter = m_shooter;
         intake = m_intake;
         addRequirements(m_shooter);
 
         addCommands(
-            shooter.runOnce(() -> shooter.ShooterRun(0.5)),
-            Commands.waitSeconds(0.5),
+            shooter.runOnce(() -> shooter.ShooterRun(0.99)),
+            Commands.waitSeconds(2),
             intake.runOnce(() -> intake.Intakerun(0.5)),
             Commands.waitSeconds(0.5),
             m_shooter.runOnce(() -> m_shooter.ShooterRun(0)),

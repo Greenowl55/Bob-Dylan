@@ -27,6 +27,8 @@ import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Autos.Drive;
+import frc.robot.Autos.Score_Trap;
 import frc.robot.commands.*;
 // import frc.robot.commands.Elevator_Down;
 // import frc.robot.commands.Elevator_Up;
@@ -123,10 +125,10 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     IntakeFeed.whileTrue(new Intake_Feed( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton ShootFast = new JoystickButton(driver, XboxController.Button.kY.value);        
-    ShootFast.whileTrue(new Shoot_High( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    ShootFast.onTrue(new Speaker( m_intake, m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton ShootSlow = new JoystickButton(driver, XboxController.Button.kRightBumper.value);        
-    ShootSlow.whileTrue(new Shoot_Slow( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    ShootSlow.onTrue(new Amp( m_intake, m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton ElevatorUp = new JoystickButton(coDriver, 3);        
     ElevatorUp.whileTrue(new Elevator_Up( m_elevator_Drive ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
@@ -142,11 +144,14 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     autoChooser =  AutoBuilder.buildAutoChooser("My Default Auto");
     SmartDashboard.putData("Auto Chooser", autoChooser);
 
-    autoChooser.setDefaultOption("Drive", runAuto);
-    autoChooser.addOption("Drive and turn", runAuto);
-    autoChooser.addOption("Silly spin", runAuto);
-    autoChooser.addOption("oneMeter", runAuto);
-    autoChooser.addOption("trap", runAuto);
+    // autoChooser.setDefaultOption("Drive", runAuto);
+    // autoChooser.addOption("Drive and turn", runAuto);
+    // autoChooser.addOption("Silly spin", runAuto);
+    // autoChooser.addOption("oneMeter", runAuto);
+    // autoChooser.addOption("trap", runAuto );
+    autoChooser.setDefaultOption("Score_Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
+    autoChooser.addOption("Drive", new Drive(drivetrain));
+    autoChooser.addOption("speaker", new Speaker(m_intake, m_shooter));
   }
 
   public Command getAutonomousCommand() {
