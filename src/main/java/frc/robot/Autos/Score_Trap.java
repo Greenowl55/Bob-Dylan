@@ -17,11 +17,13 @@ public class Score_Trap extends SequentialCommandGroup{
 
         addCommands(
             AutoBuilder.followPath(trap),
-            Shooter.runOnce(() -> Shooter.ShooterRun(0.99)),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(0.99)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(0.99)),
             Commands.waitSeconds(0.5),
             Intake.runOnce(() -> Intake.Intakerun(0.4) ),
             Commands.waitSeconds(1),
-            Shooter.runOnce(() -> Shooter.ShooterRun(0)),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
             Intake.runOnce(() -> Intake.Intakerun(0) )
         );
     }

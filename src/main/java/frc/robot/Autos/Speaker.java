@@ -16,11 +16,13 @@ public class Speaker extends SequentialCommandGroup{
     public Speaker (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
         addCommands(
-            Shooter.runOnce(() -> Shooter.ShooterRun(0.99)),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(0.99)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(0.99)),
             Commands.waitSeconds(0.5),
             Intake.runOnce(() -> Intake.Intakerun(0.4) ),
             Commands.waitSeconds(1),
-            Shooter.runOnce(() -> Shooter.ShooterRun(0)),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
             Intake.runOnce(() -> Intake.Intakerun(0) ),
             AutoBuilder.followPath(moveandrotate)
         );

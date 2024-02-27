@@ -14,8 +14,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.*;
-import edu.wpi.first.wpilibj.*;
 import java.util.function.DoubleSupplier;
 
 import frc.robot.subsystems.Intake;
@@ -68,7 +66,8 @@ public class Shoot_Slow extends Command {
         //double shootslow = m_shooterspeed.getAsDouble();
 
         new ParallelCommandGroup();
-        m_shooter.ShooterRun(0.5);
+        m_shooter.ShooterRunFront(0.5);
+        m_shooter.ShooterRunBack(0.5);
     
 
        // m_shooter.ShooterRunBack(0.5);
@@ -77,8 +76,8 @@ public class Shoot_Slow extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.ShooterRun(0.0);
-       // m_shooter.ShooterRunBack(0.0);
+        m_shooter.ShooterRunFront(0.0);
+        m_shooter.ShooterRunBack(0.0);
     }
 
     // Returns true when the command should end.

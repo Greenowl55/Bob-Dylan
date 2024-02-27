@@ -14,6 +14,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -75,6 +76,8 @@ public class RobotContainer {
     private final Intake m_intake = new Intake();
     private final Shooter m_shooter = new Shooter();
    // private final AutoChooser AutoChooser = new AutoChooser();
+
+
   /* add the joysticks */
   private final Joystick coDriver = new Joystick(1);
 private final XboxController driver = new XboxController(0);
@@ -122,7 +125,7 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     // InakeReverse.whileTrue(new Intake_Reverse( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
     final JoystickButton IntakeFeed = new JoystickButton(driver, XboxController.Button.kB.value);        
-    IntakeFeed.whileTrue(new Intake_Feed( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+    IntakeFeed.toggleOnTrue(new Intake_Feed( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                             
     final JoystickButton ShootFast = new JoystickButton(driver, XboxController.Button.kY.value);        
     ShootFast.onTrue(new Speaker( m_intake, m_shooter ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
@@ -138,6 +141,12 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     }
 
   public RobotContainer() {
+    
+    // Set the logger to log to the first flashdrive plugged in
+    SignalLogger.setPath("/media/sda1/");
+    // Explicitly start the logger
+    SignalLogger.start();
+
     configureBindings();
 
         // Build an auto chooser. This will use Commands.none() as the default option.
@@ -152,6 +161,12 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     autoChooser.setDefaultOption("Drive", new Drive(drivetrain));
     autoChooser.addOption("Score_Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
     autoChooser.addOption("speaker", new Speaker(m_intake, m_shooter));
+
+
+    // Explicitly stop logging
+    // If the user does not call stop(), then it's possible to lose the last few seconds of data
+    SignalLogger.stop();
+    
   }
 
   public Command getAutonomousCommand() {

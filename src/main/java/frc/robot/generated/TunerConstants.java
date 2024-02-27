@@ -36,7 +36,8 @@ public class TunerConstants {
     private static final double kSlipCurrentA = 300.0;
 
     // Theoretical free speed (m/s) at 12v applied output;
-    // This needs to be tuned to your individual robot
+    // This needs to be tuned to your individual robot  
+    //defult is 4.73 change back if needed
     public static final double kSpeedAt12VoltsMps = 4.73;
 
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;

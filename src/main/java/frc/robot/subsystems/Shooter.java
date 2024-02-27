@@ -99,13 +99,13 @@ m_shooterBack.setNeutralMode(NeutralModeValue.Coast);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    public void ShooterRun(double speed){
+    public void ShooterRunFront(double speed){
         m_shooterFront.set(speed);
-        m_shooterBack.set(speed);
+        //m_shooterBack.set(speed);
        
     }
-    // public void ShooterRunBack(double speed) {
-    //      m_shooterBack.set(speed);
-    // }
+    public void ShooterRunBack(double speed) {
+         m_shooterBack.set(speed);
+    }
 }
 

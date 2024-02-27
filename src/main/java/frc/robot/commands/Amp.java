@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.*;
-import edu.wpi.first.wpilibj.*;
 
 import java.io.SequenceInputStream;
 import java.util.function.DoubleSupplier;
@@ -27,11 +25,12 @@ public class Amp extends SequentialCommandGroup{
         addRequirements(m_shooter);
 
         addCommands(
-            shooter.runOnce(() -> shooter.ShooterRun(0.5)),
-            Commands.waitSeconds(0.5),
+            shooter.runOnce(() -> shooter.ShooterRunFront(0.5)),
+            shooter.runOnce(()-> shooter.ShooterRunBack(0.5)),
             intake.runOnce(() -> intake.Intakerun(0.5)),
-            Commands.waitSeconds(0.5),
-            m_shooter.runOnce(() -> m_shooter.ShooterRun(0)),
+            Commands.waitSeconds(0.75),
+            m_shooter.runOnce(() -> m_shooter.ShooterRunFront(0)),
+            shooter.runOnce(()-> shooter.ShooterRunBack(0)),
             intake.runOnce(() -> intake.Intakerun(0))
         );
     }
