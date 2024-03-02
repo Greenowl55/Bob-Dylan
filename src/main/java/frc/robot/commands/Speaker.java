@@ -26,10 +26,10 @@ public class Speaker extends SequentialCommandGroup{
 
         addCommands(
             intake.runOnce(() -> intake.Intakerun(-0.3)),
-            shooter.runOnce(() -> shooter.ShooterRunFront(0.85)),
+            shooter.runOnce(() -> shooter.ShooterRunFront(1)),
             shooter.runOnce(()-> shooter.ShooterRunBack(1)),
-            Commands.waitSeconds(1.5),
-            intake.runOnce(() -> intake.Intakerun(0.5)),
+            Commands.waitSeconds(0.75), // 1.5 sec known good time
+            intake.runOnce(() -> intake.Intakerun(1)),
             Commands.waitSeconds(0.5),
             shooter.runOnce(() -> shooter.ShooterRunFront(0)),
             shooter.runOnce(()-> shooter.ShooterRunBack(0)),

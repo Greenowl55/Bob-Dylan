@@ -12,19 +12,22 @@ import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class Speaker extends SequentialCommandGroup{
-    public Speaker (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
+public class Score_Speaker extends SequentialCommandGroup{
+    public Score_Speaker (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
         addCommands(
-            Shooter.runOnce(() -> Shooter.ShooterRunFront(0.99)),
-            Shooter.runOnce(()-> Shooter.ShooterRunBack(0.99)),
-            Commands.waitSeconds(0.5),
-            Intake.runOnce(() -> Intake.Intakerun(0.4) ),
+            swerve.runOnce(() -> swerve.seedFieldRelative()),
+            AutoBuilder.followPath(speaker_FeedSide_1),
+            rams.runOnce(() -> rams.myValveForward()),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
+            Commands.waitSeconds(1),
+            Intake.runOnce(() -> Intake.Intakerun(1) ),
             Commands.waitSeconds(1),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
             Intake.runOnce(() -> Intake.Intakerun(0) ),
-            AutoBuilder.followPath(moveandrotate)
+            AutoBuilder.followPath(speaker_feedside_2)
         );
     }
 
