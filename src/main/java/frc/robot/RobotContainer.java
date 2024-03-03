@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Autos.Drive;
 import frc.robot.Autos.Score_Speaker;
 import frc.robot.Autos.Score_Trap;
+import frc.robot.Autos.Shoot_only;
 import frc.robot.Autos.Speaker_Simple;
 import frc.robot.commands.*;
 // import frc.robot.commands.Elevator_Down;
@@ -162,7 +163,8 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     autoChooser.addOption("Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
     autoChooser.addOption("Speaker_1", new Score_Speaker(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
     autoChooser.addOption("Speaker_Simple", new Speaker_Simple(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
-    
+    autoChooser.addOption("Speakeronly", new Shoot_only(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+
 
 
     // Explicitly stop logging
