@@ -65,9 +65,8 @@ public class Shoot_Slow extends Command {
     public void execute() {
         //double shootslow = m_shooterspeed.getAsDouble();
 
-        new ParallelCommandGroup();
-        m_shooter.ShooterRunFront(0.5);
-        m_shooter.ShooterRunBack(0.5);
+        m_shooter.ShooterRunFront(0.4);
+        m_shooter.ShooterRunBack(0.4);
     
 
        // m_shooter.ShooterRunBack(0.5);

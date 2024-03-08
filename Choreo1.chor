@@ -409,7 +409,7 @@
                     "controlIntervalCount": 4
                 },
                 {
-                    "x": 1.7,
+                    "x": 2.5,
                     "y": 5.459364891052246,
                     "heading": 3.141592653589793,
                     "isInitialGuess": false,

@@ -16,12 +16,13 @@ public class Score_Trap extends SequentialCommandGroup{
     public Score_Trap (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
         addCommands(
-            swerve.runOnce(() -> swerve.seedFieldRelative()),
+            swerve.runOnce(() -> swerve.seedFieldRelative(trap.getPreviewStartingHolonomicPose())),
             AutoBuilder.followPath(trap),
-            Shooter.runOnce(() -> Shooter.ShooterRunFront(0.99)),
-            Shooter.runOnce(()-> Shooter.ShooterRunBack(0.99)),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
+            Intake.runOnce(()-> Intake.Intakerun(-0.4)),
             Commands.waitSeconds(0.5),
-            Intake.runOnce(() -> Intake.Intakerun(0.4) ),
+            Intake.runOnce(() -> Intake.Intakerun(1) ),
             Commands.waitSeconds(1),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),

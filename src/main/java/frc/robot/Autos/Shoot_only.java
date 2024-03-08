@@ -17,14 +17,21 @@ public class Shoot_only extends SequentialCommandGroup{
 
         addCommands(
             rams.runOnce(() -> rams.myValveForward()),
+            elevator.runOnce(() -> elevator.Elevatormove(-0.5)),
+            Commands.waitSeconds(4),
+            elevator.runOnce(() -> elevator.Elevatormove(0)),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
+            Intake.runOnce(() -> Intake.Intakerun(-0.3)),
             Commands.waitSeconds(2),
             Intake.runOnce(() -> Intake.Intakerun(1) ),
             Commands.waitSeconds(1),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
-            Intake.runOnce(() -> Intake.Intakerun(0) )
+            Intake.runOnce(() -> Intake.Intakerun(0)),
+            elevator.runOnce(()-> elevator.Elevatormove(0.5)),
+            Commands.waitSeconds(1.75),
+            elevator.runOnce(()-> elevator.Elevatormove(0))
         );
     }
 

@@ -17,11 +17,12 @@ public class Score_Speaker extends SequentialCommandGroup{
     public Score_Speaker (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
         addCommands(
-            swerve.runOnce(() -> swerve.seedFieldRelative()),
+            swerve.runOnce(() -> swerve.seedFieldRelative(speaker_FeedSide_1.getPreviewStartingHolonomicPose())),
             AutoBuilder.followPath(speaker_FeedSide_1),
             rams.runOnce(() -> rams.myValveForward()),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
+            Intake.runOnce(() -> Intake.Intakerun(-0.3)),
             Commands.waitSeconds(1),
             Intake.runOnce(() -> Intake.Intakerun(1) ),
             Commands.waitSeconds(1),

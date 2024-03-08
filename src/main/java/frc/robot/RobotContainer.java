@@ -176,7 +176,7 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
   public Command getAutonomousCommand() {
     /* First put the drivetrain into auto run mode, then run the auto */
     //return runAuto; // change to lines below when autochoser is figured out
-  //return new PathPlannerAuto("Tests"); 
+  //return new PathPlannerAuto("Drive"); 
    return autoChooser.getSelected();
   }
 }
