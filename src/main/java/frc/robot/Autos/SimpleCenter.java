@@ -16,14 +16,14 @@ import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class Speaker_Simple extends SequentialCommandGroup{
-    public Speaker_Simple (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
+public class SimpleCenter extends SequentialCommandGroup{
+    public SimpleCenter (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
-    //PathPlannerAuto.getStaringPoseFromAutoFile("oneMeter");
-    //Pose2d pose = PathPlannerAuto.getStaringPoseFromAutoFile("Drive");
+    Pose2d pose = PathPlannerAuto.getStaringPoseFromAutoFile("Center Simple");
+
         addCommands(
-            Commands.runOnce(() ->  swerve.seedFieldRelative(oneMeter.getPreviewStartingHolonomicPose())),
-            new WaitCommand(0.1),
+            Commands.runOnce(() ->  swerve.seedFieldRelative(pose)),
+            Commands.waitSeconds(0.1),
             rams.runOnce(() -> rams.myValveForward()),
             elevator.runOnce(() -> elevator.Elevatormove(-0.5)),
             Commands.waitSeconds(4),
@@ -32,14 +32,18 @@ public class Speaker_Simple extends SequentialCommandGroup{
             Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
             Intake.runOnce(() -> Intake.Intakerun(-0.3)),
             Commands.waitSeconds(2),
-            Intake.runOnce(() -> Intake.Intakerun(1)),
+            Intake.runOnce(() -> Intake.Intakerun(1) ),
             Commands.waitSeconds(1),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
-            Intake.runOnce(() -> Intake.Intakerun(0) ),
-            AutoBuilder.followPath(oneMeter)
-            
-
+            Intake.runOnce(() -> Intake.Intakerun(0)),
+            elevator.runOnce(()-> elevator.Elevatormove(0.5)),
+            Commands.waitSeconds(1.75),
+            elevator.runOnce(()-> elevator.Elevatormove(0)),
+            new PathPlannerAuto(("Center Simple")), 
+            Commands.waitSeconds(5),
+            Commands.runOnce( () -> swerve.seedFieldRelative())
+        
         );
     }
 

@@ -1,6 +1,12 @@
 {
   "version": 1.0,
-  "startingPose": null,
+  "startingPose": {
+    "position": {
+      "x": 0.8818897637795281,
+      "y": 4.588410319677783
+    },
+    "rotation": 135.0
+  },
   "command": {
     "type": "sequential",
     "data": {
@@ -8,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Funny spinny"
+            "pathName": "SpeakerFeedSide"
           }
         }
       ]

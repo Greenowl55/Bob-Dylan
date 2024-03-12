@@ -78,7 +78,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Pigeon", m_pigieon2.getYaw());
+   // SmartDashboard.putNumber("Pigeon", m_pigieon2.getYaw());
 
 
 

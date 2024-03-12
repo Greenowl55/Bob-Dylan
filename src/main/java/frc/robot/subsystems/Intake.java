@@ -61,7 +61,7 @@ m_intakemotor.getConfigurator().apply(new TalonFXConfiguration());
 // intake_Motor.setInverted(false);
 m_intakemotor.setInverted(false);
 // intake_Motor.setNeutralMode(NeutralMode.Coast);
-m_intakemotor.setNeutralMode(NeutralModeValue.Brake);
+m_intakemotor.setNeutralMode(NeutralModeValue.Coast);
 //         /* Set the peak and nominal outputs */
 // intake_Motor.configNominalOutputForward(0, 30);
 // intake_Motor.configNominalOutputReverse(0, 30);

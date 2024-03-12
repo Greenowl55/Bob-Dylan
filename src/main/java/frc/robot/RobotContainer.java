@@ -26,13 +26,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Autos.Drive;
 import frc.robot.Autos.Score_Speaker;
 import frc.robot.Autos.Score_Trap;
 import frc.robot.Autos.Shoot_only;
-import frc.robot.Autos.Speaker_Simple;
+import frc.robot.Autos.SimpleCenter;
+import frc.robot.Autos.Speaker_Amp_Side;
+import frc.robot.Autos.Speaker_Center;
+import frc.robot.Autos.Speaker_Feed_Side;
 import frc.robot.commands.*;
 // import frc.robot.commands.Elevator_Down;
 // import frc.robot.commands.Elevator_Up;
@@ -139,7 +143,11 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
     final JoystickButton ElevatorDown = new JoystickButton(coDriver, 4);
     ElevatorDown.whileTrue(new Elevator_Down(m_elevator_Drive).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+  
+
     }
+
 
   public RobotContainer() {
     
@@ -162,8 +170,12 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     autoChooser.setDefaultOption("Drive", new Drive(drivetrain));
     autoChooser.addOption("Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
     autoChooser.addOption("Speaker_1", new Score_Speaker(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
-    autoChooser.addOption("Speaker_Simple", new Speaker_Simple(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+    autoChooser.addOption("Speaker_Feed_Side", new Speaker_Feed_Side(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+    autoChooser.addOption("Speaker_Amp_Side", new Speaker_Amp_Side(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+    autoChooser.addOption("Speaker_Center", new Speaker_Center(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+    autoChooser.addOption("Canter and Drive", new SimpleCenter(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
     autoChooser.addOption("Speakeronly", new Shoot_only(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+
 
 
 

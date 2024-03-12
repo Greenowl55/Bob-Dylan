@@ -2,6 +2,7 @@ package frc.robot.Autos;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -30,6 +31,11 @@ public class Drive extends SequentialCommandGroup{
 
 
         Pose2d pose = PathPlannerAuto.getStaringPoseFromAutoFile("Drive1");
+        // var alliance = DriverStation.getAlliance();
+        //     if (alliance.isPresent()) {
+        //         return alliance.get() == DriverStation.Alliance.Red;
+        //     }
+        //     return false;
         //Pose2d pose = new Pose2d(1.393, 5.459, Rotation2d.fromRadians(3.142));
 
         //swerve.runOnce(() -> swerve.seedFieldRelative())
