@@ -25,8 +25,8 @@ public class Amp extends SequentialCommandGroup{
         addRequirements(m_shooter);
 
         addCommands(
-            shooter.runOnce(() -> shooter.ShooterRunFront(0.4)),
-            shooter.runOnce(()-> shooter.ShooterRunBack(0.4)),
+            shooter.runOnce(() -> shooter.ShooterRunFront(0.55)),
+            shooter.runOnce(()-> shooter.ShooterRunBack(0.45)),
             intake.runOnce(() -> intake.Intakerun(0.5)),
             Commands.waitSeconds(0.75),
             m_shooter.runOnce(() -> m_shooter.ShooterRunFront(0)),

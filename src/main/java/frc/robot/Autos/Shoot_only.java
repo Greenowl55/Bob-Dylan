@@ -16,10 +16,10 @@ public class Shoot_only extends SequentialCommandGroup{
     public Shoot_only (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
         addCommands(
-            rams.runOnce(() -> rams.myValveForward()),
-            elevator.runOnce(() -> elevator.Elevatormove(-0.5)),
-            Commands.waitSeconds(4),
-            elevator.runOnce(() -> elevator.Elevatormove(0)),
+            // rams.runOnce(() -> rams.myValveForward()),
+            // elevator.runOnce(() -> elevator.Elevatormove(-0.5)),
+            // Commands.waitSeconds(4),
+            // elevator.runOnce(() -> elevator.Elevatormove(0)),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
             Intake.runOnce(() -> Intake.Intakerun(-0.3)),
@@ -28,10 +28,10 @@ public class Shoot_only extends SequentialCommandGroup{
             Commands.waitSeconds(1),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
-            Intake.runOnce(() -> Intake.Intakerun(0)),
-            elevator.runOnce(()-> elevator.Elevatormove(0.5)),
-            Commands.waitSeconds(1.75),
-            elevator.runOnce(()-> elevator.Elevatormove(0))
+            Intake.runOnce(() -> Intake.Intakerun(0))
+            // elevator.runOnce(()-> elevator.Elevatormove(0.5)),
+            // Commands.waitSeconds(1.75),
+            // elevator.runOnce(()-> elevator.Elevatormove(0))
         );
     }
 

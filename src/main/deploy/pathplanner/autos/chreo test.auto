@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.4528851807117462,
-      "y": 4.067376136779785
+      "x": 1,
+      "y": 4.3917622566223145
     },
-    "rotation": 0.0
+    "rotation": 143.2394487827058
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ToTrap"
+            "pathName": "Speaker_FeedSide_Part_2"
           }
         }
       ]
