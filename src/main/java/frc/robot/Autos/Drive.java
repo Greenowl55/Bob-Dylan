@@ -31,20 +31,11 @@ public class Drive extends SequentialCommandGroup{
 
 
         Pose2d pose = PathPlannerAuto.getStaringPoseFromAutoFile("Drive1");
-        // var alliance = DriverStation.getAlliance();
-        //     if (alliance.isPresent()) {
-        //         return alliance.get() == DriverStation.Alliance.Red;
-        //     }
-        //     return false;
-        //Pose2d pose = new Pose2d(1.393, 5.459, Rotation2d.fromRadians(3.142));
 
-        //swerve.runOnce(() -> swerve.seedFieldRelative())
         addCommands(
-            //Commands.runOnce(() -> Robot.m_pigieon2.setYaw(0)),
             Commands.runOnce(() ->  swerve.seedFieldRelative(pose)),
             new WaitCommand(1),
-            //AutoBuilder.followPath(Drive)
-            new PathPlannerAuto(("Drive1")) // this would work but only with pathplanner autos
+            new PathPlannerAuto(("Drive1"))
 
         );
     }

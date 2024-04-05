@@ -4,16 +4,9 @@
 
 package frc.robot;
 
-import static frc.robot.Autos.Paths.*;
-
-import java.util.Set;
-
-import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 
@@ -29,35 +22,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Autos.Drive;
-import frc.robot.Autos.Score_Speaker;
-import frc.robot.Autos.Score_Trap;
-import frc.robot.Autos.Shoot_only;
-import frc.robot.Autos.SimpleCenter;
-import frc.robot.Autos.Speaker_Amp_Side;
-import frc.robot.Autos.Speaker_Center;
-import frc.robot.Autos.Speaker_Feed_Side;
+
+import frc.robot.Autos.*;
 import frc.robot.commands.*;
-// import frc.robot.commands.Elevator_Down;
-// import frc.robot.commands.Elevator_Up;
-// import frc.robot.commands.Elevator_Toggle;
-// import frc.robot.commands.Intake_Feed;
-// import frc.robot.commands.Intake_Ground;
-// import frc.robot.commands.Intake_Reverse;
-// import frc.robot.commands.Shoot_High;
-// import frc.robot.commands.Shoot_Slow;
-
 import frc.robot.generated.TunerConstants;
-
 import frc.robot.subsystems.*;
-// import frc.robot.subsystems.CommandSwerveDrivetrain;
-// import frc.robot.subsystems.Elevator_Drive;
-// import frc.robot.subsystems.Elevator_Tilt;
-// import frc.robot.subsystems.Intake;
-// import frc.robot.subsystems.Shooter;
-import pabeles.concurrency.IntRangeConsumer;
-
-// import frc.robot.Auton.AutoChooser;
 
 
 public class RobotContainer {
@@ -122,12 +91,6 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
     final JoystickButton ElevatorToggle = new JoystickButton(driver, XboxController.Button.kX.value);
     ElevatorToggle.onTrue(new Elevator_Toggle(m_elevator_Tilt).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-                            
-    // final JoystickButton InakeGround = new JoystickButton(driver, XboxController.Button.kY.value);        
-    // InakeGround.toggleOnTrue(new Intake_Ground( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-
-    // final JoystickButton InakeReverse = new JoystickButton(driver, XboxController.Button.kRightBumper.value);        
-    // InakeReverse.whileTrue(new Intake_Reverse( m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
     final JoystickButton IntakeFeed = new JoystickButton(driver, XboxController.Button.kB.value);        
     IntakeFeed.toggleOnTrue(new Intake_Feed( m_shooter, m_intake ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
@@ -144,7 +107,11 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     final JoystickButton ElevatorDown = new JoystickButton(coDriver, 4);
     ElevatorDown.whileTrue(new Elevator_Down(m_elevator_Drive).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-  
+    final JoystickButton ClimberUp = new JoystickButton(coDriver, 1);        
+    ClimberUp.onTrue(new Climber_Up( m_elevator_Drive ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+    final JoystickButton ClimberDown = new JoystickButton(coDriver, 2);        
+    ClimberDown.onTrue(new Climber_Down( m_elevator_Drive ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
     }
 
@@ -161,20 +128,16 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
         // Build an auto chooser. This will use Commands.none() as the default option.
     autoChooser =  AutoBuilder.buildAutoChooser("My Default Auto");
     SmartDashboard.putData("Auto Chooser", autoChooser);
+    
 
-    // autoChooser.setDefaultOption("Drive", runAuto);
-    // autoChooser.addOption("Drive and turn", runAuto);
-    // autoChooser.addOption("Silly spin", runAuto);
-    // autoChooser.addOption("oneMeter", runAuto);
-    // autoChooser.addOption("trap", runAuto );
     autoChooser.setDefaultOption("Drive", new Drive(drivetrain));
-    autoChooser.addOption("Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
-    autoChooser.addOption("Speaker_1", new Score_Speaker(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+    // autoChooser.addOption("Trap", new Score_Trap(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt) );
     autoChooser.addOption("Speaker_Feed_Side", new Speaker_Feed_Side(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
     autoChooser.addOption("Speaker_Amp_Side", new Speaker_Amp_Side(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
     autoChooser.addOption("Speaker_Center", new Speaker_Center(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
     autoChooser.addOption("Canter and Drive", new SimpleCenter(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
     autoChooser.addOption("Speakeronly", new Shoot_only(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
+    autoChooser.addOption("FeedSide_Centernote", new CenterKill(drivetrain, m_intake, m_shooter, m_elevator_Drive, m_elevator_Tilt));
 
 
 
@@ -186,9 +149,8 @@ SendableChooser<Command> autoChooser = new SendableChooser<Command>();
   }
 
   public Command getAutonomousCommand() {
-    /* First put the drivetrain into auto run mode, then run the auto */
-    //return runAuto; // change to lines below when autochoser is figured out
-  //return new PathPlannerAuto("Drive"); 
+
    return autoChooser.getSelected();
+
   }
 }

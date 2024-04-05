@@ -16,24 +16,25 @@ import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class Speaker_Center extends SequentialCommandGroup{
-    public Speaker_Center (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
+public class CenterKill extends SequentialCommandGroup{
+    public CenterKill (CommandSwerveDrivetrain swerve, Intake Intake, Shooter Shooter, Elevator_Drive elevator, Elevator_Tilt rams){
 
-    Pose2d pose = PathPlannerAuto.getStaringPoseFromAutoFile("Speaker3");
+    Pose2d pose = PathPlannerAuto.getStaringPoseFromAutoFile("centerkillauto");
 
         addCommands(
             Commands.runOnce(() ->  swerve.seedFieldRelative(pose)),
-            Intake.runOnce(() -> Intake.Intakerun(-0.2)),
-            Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
-            Commands.waitSeconds(0.75), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
-            Intake.runOnce(() -> Intake.Intakerun(1)),
-            Commands.waitSeconds(0.5),
+            Intake.runOnce(() -> Intake.Intakerun(-0.3)),
+            Commands.waitSeconds(1),
+            Intake.runOnce(() -> Intake.Intakerun(1) ),
+            Commands.waitSeconds(1),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
             Intake.runOnce(() -> Intake.Intakerun(0)),
-            new PathPlannerAuto(("Speaker3")), 
-            Commands.waitSeconds(6),
+            Commands.waitSeconds(1.75),
+            elevator.runOnce(()-> elevator.Elevatormove(0)),
+            new PathPlannerAuto(("centerkillauto")), 
+            Commands.waitSeconds(8),
             Commands.runOnce( () -> swerve.seedFieldRelative())
         
         );

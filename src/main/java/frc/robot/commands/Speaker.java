@@ -1,16 +1,7 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import java.io.SequenceInputStream;
-import java.util.function.DoubleSupplier;
-
-import frc.robot.commands.*;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
@@ -25,10 +16,10 @@ public class Speaker extends SequentialCommandGroup{
         addRequirements(m_shooter);
 
         addCommands(
-            intake.runOnce(() -> intake.Intakerun(-0.3)),
+            intake.runOnce(() -> intake.Intakerun(-0.2)),
             shooter.runOnce(() -> shooter.ShooterRunFront(1)),
-            shooter.runOnce(()-> shooter.ShooterRunBack(0.98)),
-            Commands.waitSeconds(0.75), // 1.5 sec known good time
+            shooter.runOnce(()-> shooter.ShooterRunBack(1)),
+            Commands.waitSeconds(0.75), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
             intake.runOnce(() -> intake.Intakerun(1)),
             Commands.waitSeconds(0.5),
             shooter.runOnce(() -> shooter.ShooterRunFront(0)),
