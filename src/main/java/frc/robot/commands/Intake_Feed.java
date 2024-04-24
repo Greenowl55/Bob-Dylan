@@ -64,7 +64,7 @@ public class Intake_Feed extends Command {
        // double collectfeed = m_shooterspeed.getAsDouble();
         m_shooter.ShooterRunFront(-0.3);
         m_intake.Intakerun(-0.3);
-        m_shooter.ShooterRunBack(-0.3);
+        m_shooter.ShooterRunBack(-0.25);
     }
 
     // Called once the command ends or is interrupted.

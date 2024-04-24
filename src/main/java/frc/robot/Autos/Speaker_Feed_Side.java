@@ -26,14 +26,14 @@ public class Speaker_Feed_Side extends SequentialCommandGroup{
             Intake.runOnce(() -> Intake.Intakerun(-0.2)),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(1)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
-            Commands.waitSeconds(0.75), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
+            Commands.waitSeconds(0.8), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
             Intake.runOnce(() -> Intake.Intakerun(1)),
             Commands.waitSeconds(0.5),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
             Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
             Intake.runOnce(() -> Intake.Intakerun(0)),
             new PathPlannerAuto(("Speaker1")), 
-            Commands.waitSeconds(5),
+            Commands.waitSeconds(6),
             Commands.runOnce( () -> swerve.seedFieldRelative())
         
         );

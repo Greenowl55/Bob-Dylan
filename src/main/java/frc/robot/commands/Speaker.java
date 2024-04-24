@@ -19,9 +19,9 @@ public class Speaker extends SequentialCommandGroup{
             intake.runOnce(() -> intake.Intakerun(-0.2)),
             shooter.runOnce(() -> shooter.ShooterRunFront(1)),
             shooter.runOnce(()-> shooter.ShooterRunBack(1)),
-            Commands.waitSeconds(0.75), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
+            Commands.waitSeconds(0.8), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
             intake.runOnce(() -> intake.Intakerun(1)),
-            Commands.waitSeconds(0.5),
+            Commands.waitSeconds(0.75),
             shooter.runOnce(() -> shooter.ShooterRunFront(0)),
             shooter.runOnce(()-> shooter.ShooterRunBack(0)),
             intake.runOnce(() -> intake.Intakerun(0))

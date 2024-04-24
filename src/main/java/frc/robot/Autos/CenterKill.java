@@ -23,20 +23,23 @@ public class CenterKill extends SequentialCommandGroup{
 
         addCommands(
             Commands.runOnce(() ->  swerve.seedFieldRelative(pose)),
-            Shooter.runOnce(()-> Shooter.ShooterRunBack(1)),
-            Intake.runOnce(() -> Intake.Intakerun(-0.3)),
-            Commands.waitSeconds(1),
-            Intake.runOnce(() -> Intake.Intakerun(1) ),
-            Commands.waitSeconds(1),
+
+            Intake.runOnce(() -> Intake.Intakerun(-0.2)),
+            Shooter.runOnce(() -> Shooter.ShooterRunFront(0.8)), //spin up the shooter
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(0.8)),
+            Commands.waitSeconds(0.75), // 1.5 sec known good time. seems to work fine at 0.75. can it go lower?
+            Intake.runOnce(() -> Intake.Intakerun(1)), // shoot the note
+            Commands.waitSeconds(0.5),
             Shooter.runOnce(() -> Shooter.ShooterRunFront(0)),
-            Shooter.runOnce(()-> Shooter.ShooterRunBack(0)),
+            Shooter.runOnce(()-> Shooter.ShooterRunBack(0)), // turn off the shooter
             Intake.runOnce(() -> Intake.Intakerun(0)),
-            Commands.waitSeconds(1.75),
-            elevator.runOnce(()-> elevator.Elevatormove(0)),
-            new PathPlannerAuto(("centerkillauto")), 
-            Commands.waitSeconds(8),
-            Commands.runOnce( () -> swerve.seedFieldRelative())
-        
+
+            new PathPlannerAuto(("centerkillauto")), //hits all the notes in the center to disrupt ops.
+            Commands.waitSeconds(10),
+            // shoot the preloaded note after hitting the center notes
+            new PathPlannerAuto(("centerkillauto2")), // goes back out to center and alligns for firld orentation
+            Commands.waitSeconds(3),
+            Commands.runOnce( () -> swerve.seedFieldRelative()) //sets field orrientation?
         );
     }
 

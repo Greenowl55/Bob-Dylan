@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7450681568046063,
-      "y": 6.637696878996495
+      "x": 0.71,
+      "y": 4.5
     },
-    "rotation": -124.62457554726704
+    "rotation": 120.49432365190096
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SpeakerAmpSide"
+            "pathName": "centerkill4"
           }
         }
       ]
